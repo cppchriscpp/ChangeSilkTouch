@@ -1,0 +1,12 @@
+# This file allows you to configure what blocks are dropped when you use a silktouch
+# tool on certain blocks. 
+
+blocks:
+  # Ice 
+  - blockType: 79
+    dropType: 79
+    count: 1
+  # Monster Spawner
+  - blockType: 52
+    dropType: 52
+    count: 1
