@@ -1,12 +1,8 @@
 package net.cpprograms.minecraft.ChangeSilkTouch;
 
-import org.bukkit.block.Block;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockListener;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.enchantments.Enchantment;
 
 /**
@@ -16,6 +12,9 @@ import org.bukkit.enchantments.Enchantment;
 public class ChangeSilkTouchBlockListener extends BlockListener {
     private final ChangeSilkTouch plugin;
 
+    /**
+     * Constructor
+     */
     public ChangeSilkTouchBlockListener(final ChangeSilkTouch plugin) {
         this.plugin = plugin;
     }
@@ -23,6 +22,7 @@ public class ChangeSilkTouchBlockListener extends BlockListener {
 
     /**
      * Called when a block is broken; let us know if a portal is being destroyed.
+     * @param event The block breaking event.
      */
     public void onBlockBreak(BlockBreakEvent event)
     {
@@ -31,7 +31,8 @@ public class ChangeSilkTouchBlockListener extends BlockListener {
     		if (event.getPlayer().getItemInHand().containsEnchantment(Enchantment.SILK_TOUCH))
     		{
     			event.setCancelled(true);
-    			plugin.blockList.get(event.getBlock().getTypeId()).drop(event.getPlayer().getWorld(), event.getBlock().getLocation());
+    			plugin.blockList.get(event.getBlock().getTypeId()).drop(event.getBlock().getLocation());
+    			event.getPlayer().getItemInHand().setDurability((short)(event.getPlayer().getItemInHand().getDurability()-1));
     			event.getBlock().setType(Material.AIR);
     		}
     	}

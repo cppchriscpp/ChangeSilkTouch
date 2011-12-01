@@ -1,8 +1,6 @@
 package net.cpprograms.minecraft.ChangeSilkTouch;
 
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 class BlockDetail {
@@ -73,9 +71,14 @@ class BlockDetail {
 		return dropCount;
 	}
 	
-	public void drop(World world, Location location) 
+	/**
+	 * Drop the item represented by this into the world at that location.
+	 * @param world The world to drop the item into.
+	 * @param location The location to drop the item into.
+	 */
+	public void drop(Location location) 
 	{
 		ItemStack ourstuff = new ItemStack(dropCount, dropType);
-		world.dropItemNaturally(location, ourstuff);
+		location.getWorld().dropItemNaturally(location, ourstuff);
 	}
 }
