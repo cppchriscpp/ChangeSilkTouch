@@ -21,7 +21,7 @@ public class ChangeSilkTouchBlockListener extends BlockListener {
 
 
     /**
-     * Called when a block is broken; let us know if a portal is being destroyed.
+     * Called when a block is broken; let us know that we need to pay attention now.
      * @param event The block breaking event.
      */
     public void onBlockBreak(BlockBreakEvent event)
