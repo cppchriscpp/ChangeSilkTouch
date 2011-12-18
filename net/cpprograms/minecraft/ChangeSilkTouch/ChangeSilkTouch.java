@@ -1,5 +1,6 @@
 package net.cpprograms.minecraft.ChangeSilkTouch;
 
+import net.cpprograms.minecraft.General.PluginBase;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,8 +8,6 @@ import java.util.ArrayList;
 
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginManager;
 
 import org.yaml.snakeyaml.Yaml;
@@ -20,7 +19,7 @@ import org.yaml.snakeyaml.reader.UnicodeReader;
  *
  * @author cppchriscpp
  */
-public class ChangeSilkTouch extends JavaPlugin {
+public class ChangeSilkTouch extends PluginBase {
 
     /**
      * A Block listener.
@@ -32,6 +31,9 @@ public class ChangeSilkTouch extends JavaPlugin {
 	 */
 	private final Yaml yaml = new Yaml(new SafeConstructor());
 	
+	/**
+	 * The blocks being used.
+	 */
 	public Map<Integer, BlockDetail> blockList;
 
 	/**
@@ -52,14 +54,14 @@ public class ChangeSilkTouch extends JavaPlugin {
 			if (data.containsKey("blocks"))
 				blocks = (ArrayList<Map<String, Object>>)data.get("blocks");
 			else {
-				System.out.println("ChangeSilkTouch: No blocks in configuration file! Are you sure you configured right?");
+				logSevere("No blocks in configuration file! Are you sure you configured right?");
 				return;
 			}
 			for (Map<String, Object> obj : blocks) {
 				int block, newblock, count=1;
 				if (!obj.containsKey("blockType")) 
 				{
-					System.out.println("ChangeSilkTouch: One of the rows in config.yml had a blank block type. It has been skipped.");
+					logWarning("One of the rows in config.yml had a blank block type. It has been skipped.");
 					continue;
 				}
 				block = Integer.parseInt(obj.get("blockType").toString());
@@ -78,20 +80,20 @@ public class ChangeSilkTouch extends JavaPlugin {
 		}
 		catch (IOException i)
 		{
-			System.out.println("ChangeSilkTouch: Could not load the configuration file! Please put a config file in the plugin's folder.");
+			logSevere("Could not load the configuration file! Please put a config file in the plugin's folder.");
 			return;
 		}
 		catch (java.lang.NumberFormatException i)
 		{
-			System.out.println("ChangeSilkTouch: An exception occurred when trying to read your config file.");
-			System.out.println("ChangeSilkTouch: Check your config.yml!");
+			logSevere("An exception occurred when trying to read your config file.");
+			logSevere("Check your config.yml!");
 			return;
 		}
 
 		if (!this.getDataFolder().exists())
 		{
-			System.out.println("ChangeSilkTouch: Could not read plugin's data folder! Please put the TravelPortals folder in the plugins folder with the plugin!");
-			System.out.println("ChangeSilkTouch: Aborting plugin load");
+			logSevere("Could not read plugin's data folder! Please put the TravelPortals folder in the plugins folder with the plugin!");
+			logSevere("Aborting plugin load");
 			return;
 		}
 
@@ -99,14 +101,14 @@ public class ChangeSilkTouch extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.BLOCK_BREAK, blockListener, Priority.High, this);
 		
-        PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
+        super.onEnable();
     }
 
     /*
      * Called upon disabling the plugin.
      */
     public void onDisable() {
+    	super.onDisable();
     }
 }
 
