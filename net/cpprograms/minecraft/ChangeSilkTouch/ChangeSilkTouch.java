@@ -69,7 +69,7 @@ public class ChangeSilkTouch extends PluginBase {
 					newblock = Integer.parseInt(obj.get("dropType").toString());
 				else
 					newblock = block;
-				if (obj.containsKey("dropCount"))
+				if (obj.containsKey("count"))
 					count = Integer.parseInt(obj.get("dropCount").toString());
 					
 				blockList.put(block, new BlockDetail(block, count, newblock));
