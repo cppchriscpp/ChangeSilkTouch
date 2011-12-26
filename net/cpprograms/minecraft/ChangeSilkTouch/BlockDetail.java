@@ -73,7 +73,6 @@ class BlockDetail {
 	
 	/**
 	 * Drop the item represented by this into the world at that location.
-	 * @param world The world to drop the item into.
 	 * @param location The location to drop the item into.
 	 */
 	public void drop(Location location) 

@@ -14,6 +14,7 @@ public class ChangeSilkTouchBlockListener extends BlockListener {
 
     /**
      * Constructor
+     * @param plugin The plugin to attach this to.
      */
     public ChangeSilkTouchBlockListener(final ChangeSilkTouch plugin) {
         this.plugin = plugin;

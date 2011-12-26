@@ -1,7 +1,6 @@
 package net.cpprograms.minecraft.ChangeSilkTouch;
 
 import net.cpprograms.minecraft.General.PluginBase;
-import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -9,10 +8,6 @@ import java.util.ArrayList;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
-
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.SafeConstructor;
-import org.yaml.snakeyaml.reader.UnicodeReader;
 
 /**
  * ChangeSilkTouch -- Make SilkTouch do what you want it to.
@@ -25,11 +20,6 @@ public class ChangeSilkTouch extends PluginBase {
      * A Block listener.
      */
     private final ChangeSilkTouchBlockListener blockListener = new ChangeSilkTouchBlockListener(this);
-
-	/**
-	 * YAML config reader
-	 */
-	private final Yaml yaml = new Yaml(new SafeConstructor());
 	
 	/**
 	 * The blocks being used.
@@ -39,22 +29,19 @@ public class ChangeSilkTouch extends PluginBase {
 	/**
 	 * Called upon enabling the plugin
 	 */
-    @SuppressWarnings({ "unchecked" })
+	@SuppressWarnings("unchecked")
 	public void onEnable() {
 
     	blockList = new HashMap<Integer, BlockDetail>();
-    	
+
 		// Read in the YAML config stuff
 		try
 		{
-			FileInputStream fIn = new FileInputStream(new File(this.getDataFolder(), "config.yml"));
-			Map<String, Object> data = (Map<String, Object>)yaml.load(new UnicodeReader(fIn));
 			ArrayList<Map<String, Object>> blocks;
-			// Yeah, this is kind of bad practice. Might have settings one day or something.
-			if (data.containsKey("blocks"))
-				blocks = (ArrayList<Map<String, Object>>)data.get("blocks");
+			if (getConfig().contains("blocks"))
+				blocks = (ArrayList<Map<String, Object>>)getConfig().get("blocks");
 			else {
-				logSevere("No blocks in configuration file! Are you sure you configured right?");
+				logSevere("No blocks in configuration file! Are you sure your configuration file is correct?");
 				return;
 			}
 			for (Map<String, Object> obj : blocks) {
@@ -70,7 +57,7 @@ public class ChangeSilkTouch extends PluginBase {
 				else
 					newblock = block;
 				if (obj.containsKey("count"))
-					count = Integer.parseInt(obj.get("dropCount").toString());
+					count = Integer.parseInt(obj.get("count").toString());
 					
 				blockList.put(block, new BlockDetail(block, count, newblock));
 				
@@ -78,7 +65,7 @@ public class ChangeSilkTouch extends PluginBase {
 
 
 		}
-		catch (IOException i)
+		catch (ClassCastException i)
 		{
 			logSevere("Could not load the configuration file! Please put a config file in the plugin's folder.");
 			return;
@@ -92,7 +79,7 @@ public class ChangeSilkTouch extends PluginBase {
 
 		if (!this.getDataFolder().exists())
 		{
-			logSevere("Could not read plugin's data folder! Please put the TravelPortals folder in the plugins folder with the plugin!");
+			logSevere("Could not read plugin's data folder! Please put the ChangeSilkTouch folder in the plugins folder with the plugin!");
 			logSevere("Aborting plugin load");
 			return;
 		}
