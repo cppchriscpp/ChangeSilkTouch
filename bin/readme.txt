@@ -1,5 +1,5 @@
 ChangeSilkTouch 
-Version 1.1
+Version 1.1.1
 
 Introduction
 ------------
@@ -16,8 +16,8 @@ ice blocks again.
 Installation
 ------------
 
-Simply drop ChangeSilkTouch.jar and the ChangeSilkTouch folder into your plugins
-folder, restart the server, and you should be set to go!
+Simply drop ChangeSilkTouch.jar into your plugins folder, restart the server, 
+and you should be set to go!
 
 If you want to change what blocks are affected by the plugin, you will need to 
 modify the configuration file in the ChangeSilkTouch folder. 
