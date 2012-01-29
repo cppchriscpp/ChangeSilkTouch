@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 
-import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 
 /**
@@ -86,7 +84,7 @@ public class ChangeSilkTouch extends PluginBase {
 
         // Register our events
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.BLOCK_BREAK, blockListener, Priority.High, this);
+        pm.registerEvents(blockListener, this);
 		
         super.onEnable();
     }
