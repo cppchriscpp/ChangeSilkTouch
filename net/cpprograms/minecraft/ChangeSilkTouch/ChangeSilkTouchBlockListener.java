@@ -36,7 +36,7 @@ public class ChangeSilkTouchBlockListener implements Listener {
     		{
     			event.setCancelled(true);
     			plugin.blockList.get(event.getBlock().getTypeId()).drop(event.getBlock().getLocation());
-    			event.getPlayer().getItemInHand().setDurability((short)(event.getPlayer().getItemInHand().getDurability()-1));
+    			event.getPlayer().getItemInHand().setDurability((short)(event.getPlayer().getItemInHand().getDurability()+1));
     			event.getBlock().setType(Material.AIR);
     		}
     	}
