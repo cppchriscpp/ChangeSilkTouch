@@ -28,7 +28,7 @@ The configuration for this plugin is quite simple. The configuration file
 currently has just one variable in it, which contains a list of all affected 
 blocks. An example is shown below: 
 
-
+```
 blocks:
   # Ice 
   - blockType: 79
@@ -36,6 +36,7 @@ blocks:
     count: 1
   # Monster Spawner
   - blockType: 52
+```
 
 The # is a comment, and can be left out. This is just to keep track of what 
 block is what.
