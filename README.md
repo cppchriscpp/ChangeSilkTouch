@@ -1,10 +1,8 @@
 ChangeSilkTouch 
-Version 1.1.1
+Version 1.2
 
 Introduction
 ------------
-
-Hello, and thank you for downloading this Bukkit plugin.
 
 This plugin allows you to change how the SilkTouch enchant functions. It allows
 you to choose what blocks are affected, and what blocks are dropped when those
