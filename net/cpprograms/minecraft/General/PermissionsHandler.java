@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 
 /**
  * Handle permissions stuff, if needed.
- * @author cppchriscpp
  *
  */
 public class PermissionsHandler
